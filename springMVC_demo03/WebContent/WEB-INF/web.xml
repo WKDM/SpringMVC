@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>springMVC_demo03</display-name>  
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list> 
+  <!-- 配置有乱码的编码过滤器，必须放在所有过滤器的第一个 -->
+ <filter>
+ 	<filter-name>CharacterEncodingFilter</filter-name>
+ 	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+ 	<init-param>
+ 		<param-name>encoding</param-name>
+ 		<param-value>UTF-8</param-value>
+ 	</init-param>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>CharacterEncodingFilter</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+   
+  
+  <!-- 配置过滤器 -->
+  <filter>
+  	<filter-name>hiddenHttpMethodFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>hiddenHttpMethodFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping> 
+  
+  
+  
+  
+  <!-- 配置springMVC -->
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>		
+		<!-- 设置springMVC配置文件的路径及名称 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:SpringMVC.xml</param-value><!-- 设置配置文件在class文件下，默认在WEB-INF下 -->
+		</init-param>
+		<!-- 
+			设置servlet的加载时间，
+			默认在第一次访问时加载，若设置此标签，将把Servlet的启动时间提前到项目启动时
+			只有设置正整数才会有效果 ，值越小优先级越高
+		-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>	
+	
+	
+</web-app>
